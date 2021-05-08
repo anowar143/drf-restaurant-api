@@ -1,0 +1,59 @@
+
+  flower:
+    image: mher/flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/
+      - FLOWER_PORT=8888
+    ports:
+      - 5555:8888
+    depends_on:
+      - worker
+
+  worker:
+    build: .
+    links:
+      - db:db
+      - redis:redis
+    command: bash -c "cd src/ && celery -A project.celery worker -l INFO --concurrency=4"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - .env
+
+
+  cron:
+    build: .
+    links:
+      - db:db
+      - redis:redis
+    command: bash -c "cd src/ && celery -A project.celery beat"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - .env
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    date_of_birth = models.DateField
+    address = models.CharField(max_length=255)
+    country = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    zip = models.CharField(max_length=5)
+    profile_pic = models.TextField(null=True)
+
