@@ -69,6 +69,9 @@ class UserProfile(models.Model):
         ('F', 'Female'),
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    city = models.CharField(max_length=128, default='', blank=True)
+    address = models.CharField(max_length=256, default='', blank=True)
+    zip = models.CharField(max_length=5, default='', blank=True)
 
     class Meta:
         db_table = "profile"

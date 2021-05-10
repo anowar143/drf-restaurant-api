@@ -5,8 +5,13 @@ from rest_framework.permissions import AllowAny
 from user.serializers import UserRegistrationSerializer
 from user.serializers import UserLoginSerializer
 
-class UserRegistrationView(CreateAPIView):
+from user.models import User
 
+#from user.models import UserProfile
+
+
+class UserRegistrationView(CreateAPIView):
+    queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
     permission_classes = (AllowAny,)
 
@@ -23,7 +28,7 @@ class UserRegistrationView(CreateAPIView):
         return Response(response, status=status_code)
 
 class UserLoginView(RetrieveAPIView):
-
+    queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserLoginSerializer
 

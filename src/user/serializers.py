@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ('first_name', 'last_name', 'phone_number', 'age', 'gender')
+        fields = ('first_name', 'last_name', 'phone_number', 'age', 'gender', 'city', 'address', 'zip')
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -34,7 +34,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             last_name=profile_data['last_name'],
             phone_number=profile_data['phone_number'],
             age=profile_data['age'],
-            gender=profile_data['gender']
+            gender=profile_data['gender'],
+            city=profile_data['city'],
+            address=profile_data['address'],
+            zip=profile_data['zip']
         )
         return user
 
