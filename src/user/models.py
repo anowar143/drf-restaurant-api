@@ -1,37 +1,74 @@
+import uuid
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-class User(AbstractUser):
-    username = models.CharField(blank=True, null=True, max_length=10)
-    email = models.EmailField(_('email address'), unique=True)
+class UserManager(BaseUserManager):
 
+    def create_user(self, email, password=None):
+
+        if not email:
+            raise ValueError('Users Must Have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+
+        if password is None:
+            raise TypeError('Superusers must have a password.')
+
+        user = self.create_user(email, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+
+        return user
+
+
+class User(AbstractBaseUser):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True
+        )
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = []
+
+    # Tells Django that the UserManager class defined above should manage
+    # objects of this type.
+    objects = UserManager()
 
     def __str__(self):
-        return "{}".format(self.email)
+        return self.email
+
+    class Meta:
+        db_table = "login"
+
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    first_name = models.CharField(max_length=50, unique=False)
+    last_name = models.CharField(max_length=50, unique=False)
+    phone_number = models.CharField(max_length=10, unique=True, null=False, blank=False)
+    age = models.PositiveIntegerField(null=False, blank=False)
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
-        ('O', 'Other'),
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    date_of_birth = models.DateField
-    address = models.CharField(max_length=255)
-    country = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    zip = models.CharField(max_length=5)
-    profile_pic = models.TextField(null=True)
-
 
     class Meta:
         db_table = "profile"

@@ -1,22 +1,41 @@
-from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from user.serializers import UserRegistrationSerializer
+from user.serializers import UserLoginSerializer
 
-from user.models import User
-from user.serializers import UserSerializer
-# Also add these imports
-from user.permissions import IsLoggedInUserOrAdmin, IsAdminUser
+class UserRegistrationView(CreateAPIView):
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserRegistrationSerializer
+    permission_classes = (AllowAny,)
 
-    # Add this code block
-    def get_permissions(self):
-        permission_classes = []
-        if self.action == 'create':
-            permission_classes = [AllowAny]
-        elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsLoggedInUserOrAdmin]
-        elif self.action == 'list' or self.action == 'destroy':
-            permission_classes = [IsAdminUser]
-        return [permission() for permission in permission_classes]
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response = {
+            'success' : 'True',
+            'status code' : status.HTTP_200_OK,
+            'message': 'User registered  successfully',
+            }
+        status_code = status.HTTP_200_OK
+        return Response(response, status=status_code)
+
+class UserLoginView(RetrieveAPIView):
+
+    permission_classes = (AllowAny,)
+    serializer_class = UserLoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        response = {
+            'success' : 'True',
+            'status code' : status.HTTP_200_OK,
+            'message': 'User logged in  successfully',
+            'token' : serializer.data['token'],
+            }
+        status_code = status.HTTP_200_OK
+
+        return Response(response, status=status_code)
