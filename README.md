@@ -1,4 +1,4 @@
-# drf-restaurant-api {as a django beginer project}
+# drf-restaurant-api ***(as a django beginer project)***
 > restaurant-ordering-system.\
 ---
 
@@ -46,6 +46,7 @@
 install virtualenv
 create env
 workon env
+git clone https://github.com/anowar143/drf-restaurant-api.git
 pip install -r requirements.txt
 ```
 ---
