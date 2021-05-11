@@ -1,4 +1,5 @@
-# drf-restaurant-api ***(as a django beginer project)***
+# drf-restaurant-api
+***as a django beginer project)***
 > restaurant-ordering-system.\
 ---
 
@@ -39,7 +40,7 @@
 
 ---
 ## installation
----
+
 #### Linux
 #### Step 1
 ```
