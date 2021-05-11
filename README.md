@@ -36,19 +36,27 @@
 * Postman/Insomnia 
 
 ## installation
+###Linux
 #### Step 1
-```install virtualenve
+```
+install virtualenv
 create env
-workon dir
-pip install -r requirements.txt ```
+workon env
+pip install -r requirements.txt
+```
 
-####Step 2
+#### Step 2
 
-```docker-compose up --build```
+```
+docker-compose up --build
+```
 
-## run commands
-```docker-compose exec app bash
+#### Step 3
+
+```
+docker-compose exec app bash
 cd src
 ./manage.py makemigrations
-./manage.py migrate```
+./manage.py migrate
+```
 
