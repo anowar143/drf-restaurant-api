@@ -5,21 +5,27 @@
 ## Features
 
 
-*Restaurants
-	* Food menu
+####Restaurants
+ * Food menu
  * Restaurant manager 
-	* Order confirmation
+ * Order confirmation
 
-*Custom user
-* **Login**
- * Registration
- * Profile
- * Admin Order management dashboard
- **(Only for superuser)**
- * etc...
+####Custom user
+* Login
+* Registration
+* Profile
+* etc...
+
+####Name of App
+* base
+* user
+* food
+* restaurant
+* order
 
 
-## Used Technologies
+
+#### Used Technologies
 * Docker
 * Python
 * Django
