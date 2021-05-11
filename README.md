@@ -5,21 +5,21 @@
 ## Features
 
 
-####Restaurants
+#### Restaurants
 
  * Food menu
  * Restaurant manager 
  * Order confirmation
 ---
 
-####Custom user
+#### Custom user
 * Login
 * Registration
 * Profile
 * etc...
 ---
 
-####Name of App
+#### Name of App
 * base
 * user
 * food
@@ -40,8 +40,7 @@
 ---
 ## installation
 ---
-###Linux
----
+#### Linux
 #### Step 1
 ```
 install virtualenv
