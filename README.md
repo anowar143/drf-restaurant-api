@@ -1,6 +1,6 @@
 # drf-restaurant-api
 > restaurant-ordering-system.\
-####As a django beginer project)
+> As a django beginer project.\
 ---
 
 ## Features
