@@ -17,7 +17,6 @@
 * Login
 * Registration
 * Profile
-* etc...
 ---
 
 #### Name of App
@@ -44,6 +43,7 @@
 #### Linux
 #### Step 1
 ```
+install Docker & Docker-compose
 install virtualenv
 create env
 workon env
