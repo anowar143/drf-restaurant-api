@@ -6,15 +6,18 @@
 
 
 ####Restaurants
+
  * Food menu
  * Restaurant manager 
  * Order confirmation
+---
 
 ####Custom user
 * Login
 * Registration
 * Profile
 * etc...
+---
 
 ####Name of App
 * base
@@ -22,8 +25,7 @@
 * food
 * restaurant
 * order
-
-
+---
 
 #### Used Technologies
 * Docker
@@ -35,8 +37,11 @@
 * Redis
 * Postman/Insomnia 
 
+---
 ## installation
+---
 ###Linux
+---
 #### Step 1
 ```
 install virtualenv
@@ -44,13 +49,13 @@ create env
 workon env
 pip install -r requirements.txt
 ```
-
+---
 #### Step 2
 
 ```
 docker-compose up --build
 ```
-
+---
 #### Step 3
 
 ```
