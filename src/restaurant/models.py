@@ -34,6 +34,6 @@ class Restaurant(BaseModel):
     objects = RestaurantManager()
 
     def __str__(self):
-        return self.title + " - " + self.slug
+        return self.title
 
 

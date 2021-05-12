@@ -15,7 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ('first_name', 'last_name', 'phone_number', 'age', 'gender', 'city', 'address', 'zip')
 
-
 class UserRegistrationSerializer(serializers.ModelSerializer):
 
     profile = UserSerializer(required=False)

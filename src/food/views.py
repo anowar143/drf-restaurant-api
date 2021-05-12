@@ -18,6 +18,7 @@ class FoodCategoryUpdateView(RetrieveUpdateAPIView):
     lookup_field = 'id'
 
 
+
 class FoodCreateView(ListCreateAPIView):
     parser_class = (FileUploadParser,)
     permission_classes = (AllowAny, )
@@ -30,6 +31,3 @@ class FoodUpdateView(RetrieveUpdateAPIView):
     queryset = Food.objects.filter()
     serializer_class = FoodSerializer
     lookup_field = 'id'
-
-    def perform_update(self, serializer):
-        serializer.save()

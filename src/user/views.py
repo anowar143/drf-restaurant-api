@@ -2,12 +2,10 @@ from rest_framework import status
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+
 from user.serializers import UserRegistrationSerializer
 from user.serializers import UserLoginSerializer
-
 from user.models import User
-
-#from user.models import UserProfile
 
 
 class UserRegistrationView(CreateAPIView):
@@ -31,6 +29,7 @@ class UserLoginView(RetrieveAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserLoginSerializer
+    #lookup_field = 'id'
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)

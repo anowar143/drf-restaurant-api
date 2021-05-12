@@ -6,14 +6,13 @@ from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 
 
 class RestaurantCreateView(ListCreateAPIView):
-    parser_class = (FileUploadParser,)
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (AllowAny,)
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
 
 class RestaurantUpdateView(RetrieveUpdateAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (AllowAny,)
     queryset = Restaurant.objects.filter()
     serializer_class = RestaurantSerializer
     lookup_field = 'id'

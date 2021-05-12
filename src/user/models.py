@@ -73,5 +73,6 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=256, default='', blank=True)
     zip = models.CharField(max_length=5, default='', blank=True)
 
+
     class Meta:
         db_table = "profile"
